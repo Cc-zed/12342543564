@@ -1,0 +1,28 @@
+from aiogram import types, Router
+from aiogram.filters import CommandStart, Command
+import random
+
+user_pr_rout = Router()
+
+@user_pr_rout.message(CommandStart())
+async def start_cmd(message:types.Message):
+    await message.answer('Hello, i`m Aishnik-007')
+@user_pr_rout.message(Command("menu"))
+async def menu_cmd(message:types.Message):
+    await message.answer('Menu: \n1. /menu\n 3. /help\n 3. /echo\n 4. /start')
+
+@user_pr_rout.message()
+async def echo(message:types.Message):
+    listofphrase = ['Hiiii', 'Wonderhoy!', 'hihihi :3']
+    randchoice = random.choice(listofphrase)
+    text = message.text.lower()
+    if text in ['hi', 'hello', 'privet', 'zdorov']:
+        await message.answer(randchoice)
+    elif text in ['bye', 'goodbye', 'cya', 'gtg', 'see ya']:
+        await message.answer("bye :(")
+    else:
+        await message.answer("I didnt understand anything :,3")
+
+
+    # await message.answer(message.text)
+    # await message.reply(message.text)
